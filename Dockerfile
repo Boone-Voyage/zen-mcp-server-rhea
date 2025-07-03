@@ -68,6 +68,10 @@ RUN mkdir -p tmp && chown -R zenuser:zenuser tmp
 # Copy health check script
 COPY --chown=zenuser:zenuser docker/scripts/healthcheck.py /usr/local/bin/healthcheck.py
 RUN chmod +x /usr/local/bin/healthcheck.py
+RUN chmod +x /app/run-server.sh
+
+# Change ownership of the app directory to the non-root user
+RUN chown -R zenuser:zenuser /app
 
 # Switch to non-root user
 USER zenuser
@@ -81,4 +85,4 @@ ENV PYTHONUNBUFFERED=1
 ENV PYTHONPATH=/app
 
 # Default command
-CMD ["python", "server.py"]
+CMD ["./run-server.sh"]

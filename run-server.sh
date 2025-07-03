@@ -8,6 +8,10 @@ set -euo pipefail
 # Handles environment setup, dependency installation, and configuration.
 # ============================================================================
 
+# Get the directory where this script is located
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "$SCRIPT_DIR"
+
 # Initialize pyenv if available (do this early)
 if [[ -d "$HOME/.pyenv" ]]; then
     export PYENV_ROOT="$HOME/.pyenv"
